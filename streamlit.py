@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import scipy.stats as stats
 from matplotlib import pyplot as plt
 from sklearn import preprocessing
 import warnings
