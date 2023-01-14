@@ -6,3 +6,4 @@ streamlit
 joblib
 fpdf
 datetime
+python -m pip install --upgrade pip
