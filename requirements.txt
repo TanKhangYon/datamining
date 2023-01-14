@@ -1,8 +1,0 @@
-pip install numpy
-pip install pandas
-pip install seaborn
-pip install scipy.stats
-pip install streamlit
-pip install joblib
-pip install fpdf
-pip install datetime
