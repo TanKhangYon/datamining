@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import scipy.stats as stats
 from matplotlib import pyplot as plt
 from sklearn import preprocessing
 import warnings
@@ -320,12 +321,12 @@ with left_column:
     predict['Time'] = Time
     predict['Race'] = Race
     predict['Kids_Category'] = Kids_Category
+    predict['Basket_colour'] = Basket_Colour
     predict['Shirt_Colour'] = Shirt_Colour
     predict['Pants_Colour'] = Pants_Colour
     predict['Washer_No'] = Washer_No
     predict['Dryer_No'] = Dryer_No
     predict['Day_of_Week'] = Day_of_Week
-    predict['Basket_colour'] = Basket_Colour
     if st.button('Predict Basket Size'):
         label_encoder = preprocessing.LabelEncoder()
         df_raw = pd.read_csv('cleaned.csv')
