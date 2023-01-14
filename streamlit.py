@@ -333,7 +333,6 @@ with left_column:
         df = df_raw.drop(columns=['Basket_Size'])
         df = pd.concat([predict, df],axis=0)
         df  = df.reset_index(drop=True)
-        df
         df_encoded = df.apply(label_encoder.fit_transform)
         prediction = rf.predict(df_encoded)
         size = np.array(['Big', 'Small'])
