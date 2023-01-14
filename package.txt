@@ -1,0 +1,8 @@
+numpy
+pandas
+seaborn
+scipy.stats
+streamlit
+joblib
+fpdf
+datetime
