@@ -4,11 +4,7 @@ import pandas as pd
 import seaborn as sns
 import scipy.stats as stats
 from matplotlib import pyplot as plt
-from scipy.stats import f_oneway
-from sklearn import metrics
 from sklearn import preprocessing
-from sklearn.preprocessing import MinMaxScaler
-from imblearn.over_sampling import SMOTE
 import warnings
 warnings.filterwarnings("ignore")
 import datetime
