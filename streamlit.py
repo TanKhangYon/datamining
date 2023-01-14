@@ -272,7 +272,7 @@ if export_as_pdf:
                 fig.savefig(tmpfile.name)
                 pdf.image(tmpfile.name, 10, 10, 200, 100)
     html = create_download_link(pdf.output(dest="S").encode("latin-1"), "EDA Report")
-    st.markdown(html, unsafe_allow_html=True)
+#     st.markdown(html, unsafe_allow_html=True)
     
 st.header('Prediction of data')
 
@@ -292,55 +292,55 @@ with left_column:
     Dryer_No = []
     Day_of_Week = []
     
-    ti = st.selectbox('Time',('Night', 'Late Night', 'Early Morning', 'Morning', 'Afternoon', 'Evening'))
+    ti = st.selectbox('Time', ('Night', 'Late Night', 'Early Morning', 'Morning', 'Afternoon', 'Evening'))
     Time.append(ti)
     
-    r = st.selectbox('Race', ('malay', 'indian', 'chinese', 'foreigner '))
+    r = st.selectbox('Race', ('malay', 'indian', 'chinese', 'foreigner'))
     Race.append(r)
     
-    kc = st.selectbox('Kids Category',('young', 'no_kids', 'toddler ', 'baby'))
+    kc = st.selectbox('Kids_Category',('young', 'no_kids', 'toddler', 'baby'))
     Kids_Category.append(kc)
     
-    bc = st.selectbox('Basket Colour', ('red', 'white', 'blue', 'black', 'pink', 'purple', 'yellow',
-       'brown', 'orange', 'green', 'grey'))
+    bc = st.selectbox('Basket_colour', ('red', 'white', 'blue', 'black', 'pink', 'purple', 'yellow', 'brown', 'orange', 'green', 'grey'))
     Basket_Colour.append(bc)
     
-    sc = st.selectbox('Shirt Colour',('blue', 'white', 'red', 'black', 'brown', 'yellow', 'grey',
-       'green', 'purple', 'orange', 'pink'))
+    sc = st.selectbox('Shirt_Colour',('blue', 'white', 'red', 'black', 'brown', 'yellow', 'grey', 'green', 'purple', 'orange', 'pink', 'black '))
     Shirt_Colour.append(sc)
     
     pc = st.selectbox('Pants_Colour', ('black', 'blue_jeans', 'yellow', 'white', 'brown', 'grey',
-       'orange', 'blue', 'green', 'red', 'purple', 'pink'))
+           'orange', 'green', 'red', 'blue', 'purple','pink'))
     Pants_Colour.append(pc)
     
-    wn  = st.selectbox('Washer No', ('3', '6', '4', '5'))
+    wn  = st.selectbox('Washer_No', ('3', '4', '5', '6'))
     Washer_No.append(wn)
     
-    dn  = st.selectbox('Dryer No', ('10', '9', '8', '7'))
+    dn  = st.selectbox('Dryer_No', ('7', '8', '9', '10'))
     Dryer_No.append(dn)
     
-    dow = st.selectbox('Day of Week', ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
+    dow = st.selectbox('Day_of_Week', ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
     Day_of_Week.append(dow)
     
     predict = pd.DataFrame()
     predict['Time'] = Time
     predict['Race'] = Race
     predict['Kids_Category'] = Kids_Category
-    predict['Basket_Colour'] = Basket_Colour
     predict['Shirt_Colour'] = Shirt_Colour
     predict['Pants_Colour'] = Pants_Colour
     predict['Washer_No'] = Washer_No
     predict['Dryer_No'] = Dryer_No
     predict['Day_of_Week'] = Day_of_Week
-    label_encoder = preprocessing.LabelEncoder()
-
-    pred_encoded = predict.apply(label_encoder.fit_transform)
+    predict['Basket_colour'] = Basket_Colour
     if st.button('Predict Basket Size'):
-        makeprediction = rf.predict(pred_encoded)
-        if(makeprediction == 0):
-            st.success('The predicted basket size is small')
-        elif(makeprediction == 1):
-            st.success('The predicted basket size is big')
+        label_encoder = preprocessing.LabelEncoder()
+        df_raw = pd.read_csv('cleaned.csv')
+        df = df_raw.drop(columns=['Basket_Size'])
+        df = pd.concat([predict, df],axis=0)
+        df  = df.reset_index(drop=True)
+        df
+        df_encoded = df.apply(label_encoder.fit_transform)
+        prediction = rf.predict(df_encoded)
+        size = np.array(['Big', 'Small'])
+        st.success('The predicted basket size is {}'.format(size[prediction][0]))
         
 with right_column:
     st.subheader('Predict Total Spent')
