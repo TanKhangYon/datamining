@@ -2,3 +2,4 @@ matplotlib
 seaborn
 prophet
 scipy
+sklearn
