@@ -177,7 +177,7 @@ figs.append(fig)
 st.header('Question 3: Will time spent affect total spent?')
 st.subheader('Exploratory Data Analysis')
 fig = plt.figure(figsize = (10,6))
-plt.title('Scatter plot of total spent in RM and max temperature')
+plt.title('Scatter plot of total spent in RM and Time Spent in minutes')
 ax = sns.scatterplot(x ='TimeSpent_minutes', y ='TotalSpent_RM', data = merged_df, palette ='plasma')
 
 for container in ax.containers:
